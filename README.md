@@ -4,3 +4,5 @@
 `./test.sh`
 
 `./testfail.sh`
+
+https://localhost:5000/token returns an access token and refresh token in json when the connection is made with the generated cert and key and returns 401 otherwise.
