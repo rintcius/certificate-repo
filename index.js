@@ -5,6 +5,10 @@ const app = express()
 const accessToken = "akdjfaslkdfjalkdj"
 const port = 5000
 
+app.get("/authorize", (req, res) => {
+  res.redirect(301, req.query.redirect_uri + "?code=whatever&state=" + req.query.state)
+})
+
 app.get("/token", (req, res) => {
 	if (req.client.authorized) {
 		res.send(JSON.stringify({"access_token": accessToken, "refresh_token": "haha"}))
