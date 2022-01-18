@@ -18,13 +18,13 @@ app.get("/token", (req, res) => {
 })
 
 app.get("/ping", (req, res) => {
-	if (req.get("Authorization") === "Bearer " + accessToken) {
+	if (req.client.authorized && (req.get("Authorization") === "Bearer " + accessToken)) {
 		res.send(JSON.stringify({"ping": "pong"}))
 	} else {
 		res.status(401).send(JSON.stringify({"error":"unauthorized"}))
 	}
 })
-	
+
 https
   .createServer({ key: fs.readFileSync("server_key.pem"), cert: fs.readFileSync("server_cert.pem"), ca: [ fs.readFileSync("server_cert.pem") ], requestCert: true, rejectUnauthorized: false }, app)
   .listen(port, _ => console.log("Listening on https://localhost:" + port))
